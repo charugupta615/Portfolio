@@ -1,0 +1,140 @@
+.sidebar {
+  position: fixed;
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 1000;
+  padding: 20px 0;
+}
+
+.theme-toggle,
+.nav-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--border-color);
+}
+
+.theme-toggle::before,
+.nav-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--accent-gradient);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.theme-toggle:hover::before,
+.nav-button:hover::before,
+.nav-button.active::before {
+  opacity: 1;
+}
+
+.theme-toggle:hover,
+.nav-button:hover,
+.nav-button.active {
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 8px 30px var(--shadow-color);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1) rotate(180deg);
+}
+
+/* Tooltip styles */
+.theme-toggle::after,
+.nav-button::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--card-bg);
+  color: var(--text-primary);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-color);
+  z-index: 1001;
+}
+
+.theme-toggle::after {
+  content: attr(data-tooltip);
+}
+
+.theme-toggle:hover::after,
+.nav-button:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(-5px);
+}
+
+/* Arrow for tooltip */
+.theme-toggle:hover::after,
+.nav-button:hover::after {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), 
+              8px 0 0 -4px var(--card-bg);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    right: 20px;
+    gap: 15px;
+  }
+  
+  .theme-toggle,
+  .nav-button {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .theme-toggle::after,
+  .nav-button::after {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    right: 15px;
+    gap: 12px;
+  }
+  
+  .theme-toggle,
+  .nav-button {
+    width: 40px;
+    height: 40px;
+  }
+}
